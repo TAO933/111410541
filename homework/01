@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陶偉淇 | 個人主頁</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', "Microsoft JhengHei", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+            color: white;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: -50px auto 50px;
+            padding: 0 20px;
+        }
+
+        /* Card Style */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .info-item i {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-right: 15px;
+            width: 25px;
+            text-align: center;
+        }
+
+        /* List Styling */
+        .list-items {
+            list-style: none;
+        }
+
+        .list-items li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .list-items li::before {
+            content: "▹";
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Tag Styling */
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #e1f0fa;
+            color: #3498db;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .container { margin-top: -30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>陶偉淇</h1>
+        <p>國立金門大學資訊工程學系</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="card">
+            <h2><i class="fas fa-user-circle"></i> 聯絡資訊</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>taow8603@gmail.com</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>0910-180-109</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>資工系 一年級</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>金門, 台灣</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2><i class="fas fa-university"></i> 學歷背景</h2>
+            <ul class="list-items">
+                <li>
+                    <div>
+                        <strong>國立金門大學</strong><br>
+                        <small>資訊工程學系 | 2025 - 至今</small>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2><i class="fas fa-id-card"></i> 持有證照</h2>
+            <div class="tag-container">
+                <span class="tag"><i class="fas fa-car"></i> 普通小型車駕照 (自排)</span>
+                <span class="tag"><i class="fas fa-motorcycle"></i> 普通重型機車執照</span>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2><i class="fas fa-heart"></i> 興趣愛好</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-baseball-ball"></i>
+                    <span>觀賞棒球比賽</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-flag-checkered"></i>
+                    <span>F1 一級方程式賽車</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 陶偉淇. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
