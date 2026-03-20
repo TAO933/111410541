@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員系統 </title>
+    <style>
+        /* --- 基礎設定 --- */
+        * {
+            box-sizing: border-box;
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+        }
+
+        /* 頁面載入動畫 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            /* 套用載入動畫 */
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #666;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        /* --- 輸入框增強 --- */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease; /* 平滑過渡 */
+            background-color: #fafafa;
+        }
+
+        /* 焦點時：陰影效果、輕微向上移動、邊框變色 */
+        input:focus {
+            border-color: #4facfe;
+            background-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.2);
+        }
+
+        input:focus + label {
+            color: #4facfe;
+        }
+
+        /* 密碼切換容器 */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.2s;
+            z-index: 10;
+        }
+
+        .toggle-password:hover {
+            transform: translateY(-50%) scale(1.2); /* 懸停時放大 */
+        }
+
+        /* --- 按鈕優化 (漸層與懸停) --- */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px); /* 向上移動 */
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.5);
+            filter: brightness(1.05);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* --- 互動細節 --- */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            padding: 5px 0;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .radio-item:hover {
+            color: #4facfe;
+        }
+
+        .radio-item input {
+            margin-right: 8px;
+            accent-color: #4facfe; /* 單選鈕變色 */
+        }
+
+        .switch-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .switch-text a {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .switch-text a:hover {
+            background-color: rgba(79, 172, 254, 0.1);
+            color: #00c6ff;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <div id="loginSection">
+            <h2>會員登入</h2>
+            <form onsubmit="handleSubmit(event)">
+                <div class="input-group">
+                    <label>Gmail</label>
+                    <input type="email" placeholder="example@gmail.com" required>
+                </div>
+                <div class="input-group">
+                    <label>密碼</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="loginPwd" placeholder="請輸入密碼" required>
+                        <span class="toggle-password" onclick="togglePassword('loginPwd')">👁️</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn">立即登入</button>
+            </form>
+            <p class="switch-text">還沒有帳號？ <a href="javascript:void(0)" onclick="switchForm()">立即註冊</a></p>
+        </div>
+
+        <div id="signupSection" class="hidden">
+            <h2>建立新帳號</h2>
+            <form onsubmit="handleSubmit(event)">
+                <div class="input-group">
+                    <label>真實姓名</label>
+                    <input type="text" placeholder="請輸入姓名" required>
+                </div>
+                <div class="input-group">
+                    <label>Gmail</label>
+                    <input type="email" placeholder="example@gmail.com" required>
+                </div>
+                <div class="input-group">
+                    <label>電話號碼</label>
+                    <input type="tel" placeholder="09xx-xxx-xxx" required>
+                </div>
+                <div class="input-group">
+                    <label>設定密碼</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signupPwd" placeholder="至少 8 位字元" required>
+                        <span class="toggle-password" onclick="togglePassword('signupPwd')">👁️</span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>性別</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="gender" value="male" required> 男</label>
+                        <label class="radio-item"><input type="radio" name="gender" value="female"> 女</label>
+                        <label class="radio-item"><input type="radio" name="gender" value="other"> 其他</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>出生年月日</label>
+                    <input type="date" required>
+                </div>
+                <button type="submit" class="btn">完成註冊</button>
+            </form>
+            <p class="switch-text">已經有帳號了？ <a href="javascript:void(0)" onclick="switchForm()">返回登入</a></p>
+        </div>
+    </div>
+
+    <script>
+        // 切換表單時添加淡入效果
+        function switchForm() {
+            const container = document.getElementById('mainContainer');
+            // 每次切換觸發一次小動畫
+            container.style.animation = 'none';
+            container.offsetHeight; /* 觸發重繪 */
+            container.style.animation = 'fadeInUp 0.5s ease-out';
+
+            document.getElementById('loginSection').classList.toggle('hidden');
+            document.getElementById('signupSection').classList.toggle('hidden');
+        }
+
+        function togglePassword(id) {
+            const pwdInput = document.getElementById(id);
+            const toggleIcon = pwdInput.nextElementSibling;
+            
+            if (pwdInput.type === "password") {
+                pwdInput.type = "text";
+                toggleIcon.textContent = "🙈";
+            } else {
+                pwdInput.type = "password";
+                toggleIcon.textContent = "👁️";
+            }
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert("提交成功！");
+        }
+    </script>
+</body>
+</html>
