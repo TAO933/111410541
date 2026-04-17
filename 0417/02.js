@@ -1,0 +1,6 @@
+(function() {
+  const count = 100;
+  console.log("Count is: " + count);
+})();
+
+//Count is: 100
