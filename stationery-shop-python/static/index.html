@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文具町 | 頂級一頁式文具店</title>
+    <meta name="description" content="選用最高質感的文具，提升生活品味與工作效率。擁有完整的購物與評論體驗。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Application -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title" id="app-title">文具町 Stationery</h1>
+                <p class="hero-subtitle">為您帶來高質感的書寫與辦公器物，點亮每一天。</p>
+                <button class="btn btn-primary" id="explore-btn">探索系列</button>
+            </div>
+        </section>
 
+        <!-- Products Section -->
+        <section id="products-section" class="container">
+            <!-- Loading Indicator -->
+            <div id="loading" class="loading-container">
+                <h3 class="hero-title loading-text">載入中...</h3>
+            </div>
+            
+            <!-- Dynamic products will be injected here -->
+            <div id="products-container"></div>
+        </section>
+    </main>
+
+    <!-- Order & Comment Modal Overlay (hidden by default) -->
+    <div id="order-modal-overlay" class="modal-overlay" style="display: none;">
+        <div class="glass-panel modal-content">
+            <!-- Close Button -->
+            <button id="modal-close-btn" class="modal-close">&times;</button>
+            
+            <div class="modal-flex-container">
+                <!-- Product Image Area -->
+                <div class="modal-image-area">
+                    <img id="modal-product-image" src="" alt="">
+                </div>
+                
+                <!-- Product Details & Checkout Area -->
+                <div class="modal-details-area">
+                    <h2 id="modal-product-name" class="modal-title"></h2>
+                    <h3 id="modal-product-price" class="modal-price"></h3>
+                    <p id="modal-product-desc" class="modal-desc"></p>
+                    
+                    <!-- Checkout Form -->
+                    <form id="checkout-form" class="checkout-form-panel">
+                        <h4 style="margin-bottom: 16px;">訂購商品</h4>
+                        <div class="form-row">
+                            <div style="flex: 1;">
+                                <label class="form-label">姓名</label>
+                                <input type="text" id="customer-name" required placeholder="請輸入您的姓名">
+                            </div>
+                            <div style="width: 100px;">
+                                <label class="form-label">數量</label>
+                                <input type="number" id="order-quantity" min="1" value="1" required>
+                            </div>
+                        </div>
+                        <div class="form-checkout-summary">
+                            <span>總計: <strong id="total-price-summary">NT$ 0</strong></span>
+                            <button type="submit" class="btn btn-primary">確認結帳</button>
+                        </div>
+                    </form>
+                    
+                    <!-- Checkout Success Panel -->
+                    <div id="checkout-success" class="checkout-success-panel" style="display: none;">
+                        <h3 style="color: #10b981; margin-bottom: 10px;">🎉 訂單已成功送出！</h3>
+                        <p>感謝您的購買，我們將盡快為您處理。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comment Section inside Modal -->
+            <div class="modal-comment-area">
+                <div class="comment-section-container">
+                    <h4 style="font-size: 1.2rem; margin-bottom: 16px;">顧客評論區</h4>
+                    
+                    <!-- Comments List -->
+                    <div id="comments-list" class="comments-list"></div>
+                    
+                    <!-- Add Comment Form -->
+                    <form id="comment-form" class="comment-form">
+                        <h5 id="comment-form-title" style="margin-bottom: 12px;">新增評論</h5>
+                        <div style="margin-bottom: 12px;">
+                            <input type="text" id="comment-author" placeholder="您的姓名" required>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <textarea id="comment-content" rows="3" placeholder="您的留言..." required></textarea>
+                        </div>
+                        <input type="hidden" id="parent-comment-id" value="">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">送出留言</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
